@@ -1,0 +1,13 @@
+*.class
+*.log
+.idea/
+.idea
+*.iml
+target/
+target
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
