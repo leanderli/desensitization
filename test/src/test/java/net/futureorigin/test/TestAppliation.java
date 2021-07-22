@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(
         scanBasePackages = {
-                "net.futureorigin"
         }
 )
 public class TestAppliation {

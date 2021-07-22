@@ -1,4 +1,4 @@
-package net.futureorigin.datadesensitization.core.serializer;
+package net.futureorigin.datadesensitization.core.serializer.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
@@ -8,25 +8,25 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
-import net.futureorigin.datadesensitization.core.annotation.SensitiveFieldBind;
 
 import java.io.IOException;
 
 /**
  * data-desensitization
  * <p>
- * 敏感数据自定义序列化处理
+ * 适配Jackson的敏感数据自定义序列化处理
  * </p>
  *
  * @author Leander Lee create on 2021/7/20.
  */
-public class SensitiveFieldSerializer extends JsonSerializer<Object> implements ContextualSerializer {
+public class JacksonSensitiveFieldSerializer extends JsonSerializer<Object> implements ContextualSerializer {
 
     private String mSensitiveFieldType;
 
-    public SensitiveFieldSerializer() {}
+    public JacksonSensitiveFieldSerializer() {
+    }
 
-    public SensitiveFieldSerializer(String sensitiveFieldType) {
+    public JacksonSensitiveFieldSerializer(String sensitiveFieldType) {
         this.mSensitiveFieldType = sensitiveFieldType;
     }
 
@@ -52,7 +52,7 @@ public class SensitiveFieldSerializer extends JsonSerializer<Object> implements 
                 sensitiveField = beanProperty.getContextAnnotation(SensitiveField.class);
             }
             if (null != sensitiveField) {
-                return new SensitiveFieldSerializer(sensitiveField.type());
+                return new JacksonSensitiveFieldSerializer(sensitiveField.value());
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         } else {

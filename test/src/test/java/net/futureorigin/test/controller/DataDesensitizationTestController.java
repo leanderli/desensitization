@@ -24,16 +24,14 @@ public class DataDesensitizationTestController {
 
     static {
         SensitiveFieldHandlerRegistry.getRegistry().registerSensitiveFieldHandler(
-                new BirthdaySensitiveFieldHandler(),
-                new CustomAddressSensitiveFieldHandler()
+                new BirthdaySensitiveFieldHandler()
         );
     }
-
     @GetMapping(path = "getUser")
-    public ResponseEntity<UserCO> getUser() {
+    public UserCO getUser() {
         UserCO userCO = new UserCO();
         userCO.setId(UUID.randomUUID().toString());
-        userCO.setUserName("User-" + UUID.randomUUID().toString());
+        userCO.setUserName("User-" + UUID.randomUUID());
         userCO.setUserCnName("李华");
         userCO.setUserEnName("Washing·Lee");
         userCO.setIdCardNo(110101199003073271L);
@@ -48,7 +46,7 @@ public class DataDesensitizationTestController {
 
         userCO.setBirthday(new Date());
 
-        return ResponseEntity.ok(userCO);
+        return userCO;
     }
 
 }

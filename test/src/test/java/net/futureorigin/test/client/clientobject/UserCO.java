@@ -5,7 +5,6 @@ import net.futureorigin.datadesensitization.core.SensitiveFieldType;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 import net.futureorigin.test.common.CustomSensitiveFieldType;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,38 +14,39 @@ import java.util.Date;
  * @author Leander Lee create on 2021/7/21.
  */
 @Data
-public class UserCO implements Serializable {
+public class UserCO extends BaseCO {
 
-    private String id;
     private String userName;
+
+    @SensitiveField(SensitiveFieldType.CN_NAME)
     private String userCnName;
     private String userEnName;
 
-    @SensitiveField(type = SensitiveFieldType.ID_CARD_NO)
+    @SensitiveField(value = SensitiveFieldType.ID_CARD_NO)
     private Long idCardNo;
 
-    @SensitiveField(type = SensitiveFieldType.TELEPHONE)
+    @SensitiveField(value = SensitiveFieldType.TELEPHONE)
     private String telephone;
 
-    @SensitiveField(type = SensitiveFieldType.MOBILE)
+    @SensitiveField(value = SensitiveFieldType.MOBILE)
     private Long mobile;
 
-    @SensitiveField(type = SensitiveFieldType.ADDRESS)
+    @SensitiveField(value = SensitiveFieldType.ADDRESS)
     private String address;
 
-    @SensitiveField(type = SensitiveFieldType.EMAIL)
+    @SensitiveField(value = SensitiveFieldType.EMAIL)
     private String email;
 
-    @SensitiveField(type = SensitiveFieldType.BANK_CARD_NO)
+    @SensitiveField(value = SensitiveFieldType.BANK_CARD_NO)
     private Long bankCardNo;
 
-    @SensitiveField(type = SensitiveFieldType.BANK_COOP_NO)
+    @SensitiveField(value = SensitiveFieldType.BANK_COOP_NO)
     private Long bankCoopNo;
 
-    @SensitiveField(type = SensitiveFieldType.COMMON_NO)
+    @SensitiveField(value = SensitiveFieldType.COMMON_NO)
     private Long studentNo;
 
-    @SensitiveField(type = CustomSensitiveFieldType.BIRTHDAY)
+    @SensitiveField(value = CustomSensitiveFieldType.BIRTHDAY)
     private Date birthday;
 
 
