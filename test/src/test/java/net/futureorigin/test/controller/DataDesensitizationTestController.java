@@ -1,6 +1,7 @@
 package net.futureorigin.test.controller;
 
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
+import net.futureorigin.datadesensitization.core.handler.CommonNoSensitiveFieldHandler;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
 import net.futureorigin.test.common.CustomAddressSensitiveFieldHandler;
@@ -24,9 +25,11 @@ public class DataDesensitizationTestController {
 
     static {
         SensitiveFieldHandlerRegistry.getRegistry().registerSensitiveFieldHandler(
-                new BirthdaySensitiveFieldHandler()
+                new BirthdaySensitiveFieldHandler(),
+                new CommonNoSensitiveFieldHandler()
         );
     }
+
     @GetMapping(path = "getUser")
     public UserCO getUser() {
         UserCO userCO = new UserCO();

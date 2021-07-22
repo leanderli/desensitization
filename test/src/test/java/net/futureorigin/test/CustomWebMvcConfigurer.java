@@ -25,6 +25,10 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         // 1.定义一个converters转换消息的对象
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
 
+        // 2.添加fastjson的配置信息，比如: 是否需要格式化返回的json数据
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
         supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
@@ -45,10 +49,8 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         supportedMediaTypes.add(MediaType.TEXT_XML);
         fastConverter.setSupportedMediaTypes(supportedMediaTypes);
 
-        // 2.添加fastjson的配置信息，比如: 是否需要格式化返回的json数据
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastJsonConfig.setSerializeFilters(new FastJsonSensitiveFieldSerializer());//添加自己写的拦截器
+        // 【注意】配置自定义的序列化过滤器
+        fastJsonConfig.setSerializeFilters(new FastJsonSensitiveFieldSerializer());
         // 3.在converter中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
         // 4.将converter赋值给HttpMessageConverter
