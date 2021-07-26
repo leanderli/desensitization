@@ -24,13 +24,13 @@ public class UserCO extends BaseCO {
     private String userCnName;
     private String userEnName;
 
-    @SensitiveField(value = SensitiveFieldType.ID_CARD_NO)
+    @SensitiveField(value = SensitiveFieldType.ID_CARD_NO, clz = UserCO.class)
     private Long idCardNo;
 
-    @SensitiveField(value = SensitiveFieldType.TELEPHONE)
+    @SensitiveField(value = SensitiveFieldType.TELEPHONE, clz = UserCO.class)
     private String telephone;
 
-    @SensitiveField(value = SensitiveFieldType.MOBILE)
+    @SensitiveField(value = SensitiveFieldType.MOBILE, clz = UserCO.class)
     private Long mobile;
 
     @SensitiveField(value = SensitiveFieldType.ADDRESS)
