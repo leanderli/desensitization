@@ -1,15 +1,19 @@
 package net.futureorigin.test.controller;
 
+import cn.hutool.core.annotation.AnnotationUtil;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
+import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.handler.CommonNoSensitiveFieldHandler;
+import net.futureorigin.datadesensitization.core.util.DesensitizationUtils;
+import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
-import net.futureorigin.test.common.CustomAddressSensitiveFieldHandler;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.UUID;
 
@@ -30,6 +34,9 @@ public class DataDesensitizationTestController {
         );
     }
 
+    @Autowired
+    private HttpServletRequest request;
+
     @GetMapping(path = "getUser")
     public UserCO getUser() {
         UserCO userCO = new UserCO();
@@ -49,7 +56,28 @@ public class DataDesensitizationTestController {
 
         userCO.setBirthday(new Date());
 
+        boolean desensitization = Boolean.parseBoolean(request.getHeader("Data-Desensitization"));
+        if (desensitization) {
+            DesensitizationUtils.desensitization(userCO.getClass());
+        } else {
+            DesensitizationUtils.nonDesensization(userCO.getClass());
+        }
         return userCO;
+    }
+
+    @GetMapping(path = "getGroup")
+    public GroupCO getGroup() {
+        GroupCO groupCO = new GroupCO();
+        groupCO.setGroupName("TestGroup");
+        groupCO.setGroupClass("ROLE");
+
+        boolean desensitization = Boolean.parseBoolean(request.getHeader("Data-Desensitization"));
+        if (desensitization) {
+            DesensitizationUtils.desensitization(groupCO.getClass());
+        } else {
+            DesensitizationUtils.nonDesensization(groupCO.getClass());
+        }
+        return groupCO;
     }
 
 }

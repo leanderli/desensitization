@@ -3,6 +3,7 @@ package net.futureorigin.datadesensitization.core.serializer.fastjson;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
+import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 
 import java.lang.reflect.Field;
@@ -25,11 +26,17 @@ public class FastJsonSensitiveFieldSerializer implements ValueFilter {
         }
         Class<? extends Object> clz = object.getClass();
         try {
+            Desensitization desensitization = clz.getAnnotation(Desensitization.class);
+            if (null != desensitization && !desensitization.value()) {
+                return value;
+            }
+
             Field field = ReflectUtil.getField(clz, name);
             SensitiveField sensitiveField = field.getAnnotation(SensitiveField.class);
             if (null == sensitiveField) {
                 return value;
             }
+
             String sensitiveFieldType = sensitiveField.value();
             SensitiveFieldHandlerRegistry handlerRegistry = SensitiveFieldHandlerRegistry.getRegistry();
             if (handlerRegistry.alreadyBeSensitived(value)) {

@@ -24,6 +24,12 @@ import java.lang.annotation.*;
 public @interface SensitiveField {
 
     /**
+     * 当前对象Class
+     * @return Class
+     */
+    Class clz() default SensitiveField.class;
+
+    /**
      * 敏感数据类型
      * @return SensitiveFieldType
      */

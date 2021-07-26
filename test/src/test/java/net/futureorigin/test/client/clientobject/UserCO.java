@@ -2,6 +2,7 @@ package net.futureorigin.test.client.clientobject;
 
 import lombok.Data;
 import net.futureorigin.datadesensitization.core.SensitiveFieldType;
+import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 import net.futureorigin.test.common.CustomSensitiveFieldType;
 
@@ -14,11 +15,12 @@ import java.util.Date;
  * @author Leander Lee create on 2021/7/21.
  */
 @Data
+@Desensitization
 public class UserCO extends BaseCO {
 
     private String userName;
 
-    @SensitiveField(SensitiveFieldType.CN_NAME)
+    @SensitiveField(value = SensitiveFieldType.CN_NAME, clz = UserCO.class)
     private String userCnName;
     private String userEnName;
 
@@ -48,6 +50,7 @@ public class UserCO extends BaseCO {
 
     @SensitiveField(value = CustomSensitiveFieldType.BIRTHDAY)
     private Date birthday;
+
 
 
 }

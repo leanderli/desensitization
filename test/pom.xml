@@ -28,12 +28,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.version}</version>
-                <exclusions>
+                <!--<exclusions>
                     <exclusion>
                         <groupId>com.fasterxml.jackson.core</groupId>
                         <artifactId>jackson-databind</artifactId>
                     </exclusion>
-                </exclusions>
+                </exclusions>-->
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -47,13 +47,23 @@
             <groupId>net.futureorigin</groupId>
             <artifactId>data-desensitization-core</artifactId>
             <version>${version}</version>
-            <exclusions>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
 </project>
