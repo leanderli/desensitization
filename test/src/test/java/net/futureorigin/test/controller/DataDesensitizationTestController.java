@@ -2,7 +2,7 @@ package net.futureorigin.test.controller;
 
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
 import net.futureorigin.datadesensitization.core.handler.CommonNoSensitiveFieldHandler;
-import net.futureorigin.datadesensitization.core.util.DesensitizationUtils;
+import net.futureorigin.datadesensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
@@ -38,7 +38,7 @@ public class DataDesensitizationTestController extends SensitiveHandleController
         UserCO userCO = generateUser(0);
 
         return ResponseEntity.ok(nonDesensitization()
-                ? userCO : DesensitizationUtils.desensitization(userCO));
+                ? userCO : SensitiveObjectHandler.desensitization(userCO));
     }
 
     @GetMapping(path = "getUserList")
@@ -49,7 +49,7 @@ public class DataDesensitizationTestController extends SensitiveHandleController
         }
 
         return ResponseEntity.ok(nonDesensitization()
-                ? userCOS : DesensitizationUtils.desensitization(userCOS));
+                ? userCOS : SensitiveObjectHandler.desensitization(userCOS));
     }
 
     @GetMapping(path = "getGroup")

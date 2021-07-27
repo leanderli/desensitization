@@ -3,7 +3,7 @@ package net.futureorigin.test;
 import com.alibaba.fastjson.JSON;
 import net.futureorigin.datadesensitization.core.bean.BeanField;
 import net.futureorigin.datadesensitization.core.bean.DynamicBean;
-import net.futureorigin.datadesensitization.core.util.DesensitizationUtils;
+import net.futureorigin.datadesensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 
@@ -21,14 +21,14 @@ public class Test {
     @org.junit.Test
     public void testDesensitization() {
         UserCO userCO = generateUser(0);
-        System.out.println(JSON.toJSONString(DesensitizationUtils.desensitization(userCO)));
+        System.out.println(JSON.toJSONString(SensitiveObjectHandler.desensitization(userCO)));
 
         GroupCO groupCO = new GroupCO();
         groupCO.setGroupName("TestGroup");
         groupCO.setGroupClass("ROLE");
         groupCO.setTelephone("0108899988");
         groupCO.setIndex(123456433333L);
-        GroupCO returned = (GroupCO) DesensitizationUtils.desensitization(groupCO);
+        GroupCO returned = (GroupCO) SensitiveObjectHandler.desensitization(groupCO);
         System.out.println(JSON.toJSONString(returned));
     }
 

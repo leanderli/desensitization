@@ -1,10 +1,8 @@
-package net.futureorigin.datadesensitization.core.util;
+package net.futureorigin.datadesensitization.core;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ReflectUtil;
-import net.futureorigin.datadesensitization.core.SensitiveFieldHandler;
-import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 import net.futureorigin.datadesensitization.core.bean.BeanField;
 import net.futureorigin.datadesensitization.core.bean.DynamicBean;
@@ -16,14 +14,14 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * DesensitizationUtils
+ * SensitiveObjectHandler
  * <p>
- * 脱敏处理工具类
+ * 敏感对象处理类
  * </p>
  *
  * @author Leander Lee create on 2021/7/27.
  */
-public class DesensitizationUtils {
+public class SensitiveObjectHandler {
 
     public static Object desensitization(Object object) {
         if (Objects.isNull(object)) {
