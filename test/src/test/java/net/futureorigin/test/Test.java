@@ -6,6 +6,7 @@ import net.futureorigin.desensitization.core.bean.DynamicBean;
 import net.futureorigin.desensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.UUID;
@@ -18,17 +19,21 @@ import java.util.UUID;
  */
 public class Test {
 
+    @Autowired
+    private SensitiveObjectHandler sensitiveObjectHandler;
+
+
     @org.junit.Test
     public void testDesensitization() {
         UserCO userCO = generateUser(0);
-        System.out.println(JSON.toJSONString(SensitiveObjectHandler.desensitization(userCO)));
+        System.out.println(JSON.toJSONString(sensitiveObjectHandler.desensitization(userCO)));
 
         GroupCO groupCO = new GroupCO();
         groupCO.setGroupName("TestGroup");
         groupCO.setGroupClass("ROLE");
         groupCO.setTelephone("0108899988");
         groupCO.setIndex(123456433333L);
-        GroupCO returned = (GroupCO) SensitiveObjectHandler.desensitization(groupCO);
+        GroupCO returned = (GroupCO) sensitiveObjectHandler.desensitization(groupCO);
         System.out.println(JSON.toJSONString(returned));
     }
 

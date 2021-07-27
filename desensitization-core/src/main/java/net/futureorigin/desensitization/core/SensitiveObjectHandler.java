@@ -23,26 +23,7 @@ import java.util.Objects;
  */
 public class SensitiveObjectHandler {
 
-    public static Object desensitization(Object object) {
-        if (Objects.isNull(object)) {
-            throw new IllegalArgumentException("'object' must be not null");
-        }
-        if (object instanceof Map) {
-            return object;
-        } else if (object instanceof List) {
-            List<Object> objectList = (List<Object>) object;
-            if (CollectionUtil.isEmpty(objectList)) {
-                return object;
-            }
-
-            List<Object> newObjectList = new ArrayList<>();
-            for (Object o : objectList) {
-                newObjectList.add(handleObject(o));
-            }
-            return newObjectList;
-        } else {
-            return handleObject(object);
-        }
+    public SensitiveObjectHandler() {
     }
 
     private static Object handleObject(Object object) {
@@ -102,5 +83,27 @@ public class SensitiveObjectHandler {
             }
         }
         return true;
+    }
+
+    public Object desensitization(Object object) {
+        if (Objects.isNull(object)) {
+            throw new IllegalArgumentException("'object' must be not null");
+        }
+        if (object instanceof Map) {
+            return object;
+        } else if (object instanceof List) {
+            List<Object> objectList = (List<Object>) object;
+            if (CollectionUtil.isEmpty(objectList)) {
+                return object;
+            }
+
+            List<Object> newObjectList = new ArrayList<>();
+            for (Object o : objectList) {
+                newObjectList.add(handleObject(o));
+            }
+            return newObjectList;
+        } else {
+            return handleObject(object);
+        }
     }
 }

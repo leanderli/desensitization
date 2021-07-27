@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>net.futureorigin</groupId>
-            <artifactId>desensitization-core</artifactId>
+            <artifactId>desensitization-spring-boot-starter</artifactId>
             <version>${version}</version>
         </dependency>
 

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(
         scanBasePackages = {
+                "net.futureorigin.desensitization", "net.futureorigin.test"
         }
 )
 public class TestAppliation {

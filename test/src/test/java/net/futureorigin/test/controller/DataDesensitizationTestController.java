@@ -6,6 +6,7 @@ import net.futureorigin.desensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,19 +27,15 @@ import java.util.UUID;
 @RequestMapping(path = "test")
 public class DataDesensitizationTestController extends SensitiveHandleController {
 
-    static {
-        SensitiveFieldHandlerRegistry.getRegistry().registerSensitiveFieldHandler(
-                new BirthdaySensitiveFieldHandler(),
-                new CommonNoSensitiveFieldHandler()
-        );
-    }
+    @Autowired
+    private SensitiveObjectHandler sensitiveObjectHandler;
 
     @GetMapping(path = "getUser")
     public ResponseEntity<Object> getUser() {
         UserCO userCO = generateUser(0);
 
         return ResponseEntity.ok(nonDesensitization()
-                ? userCO : SensitiveObjectHandler.desensitization(userCO));
+                ? userCO : sensitiveObjectHandler.desensitization(userCO));
     }
 
     @GetMapping(path = "getUserList")
@@ -49,7 +46,7 @@ public class DataDesensitizationTestController extends SensitiveHandleController
         }
 
         return ResponseEntity.ok(nonDesensitization()
-                ? userCOS : SensitiveObjectHandler.desensitization(userCOS));
+                ? userCOS : sensitiveObjectHandler.desensitization(userCOS));
     }
 
     @GetMapping(path = "getGroup")

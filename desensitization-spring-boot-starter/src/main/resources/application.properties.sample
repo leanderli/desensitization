@@ -1,0 +1,2 @@
+net.futureorigin.desensitization.additional-handlers=net.futureorigin.desensitization.core.handler.AddressSensitiveFieldHandler,
+
