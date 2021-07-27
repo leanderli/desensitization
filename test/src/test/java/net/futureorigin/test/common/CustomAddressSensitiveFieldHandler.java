@@ -1,6 +1,6 @@
 package net.futureorigin.test.common;
 
-import net.futureorigin.datadesensitization.core.handler.AddressSensitiveFieldHandler;
+import net.futureorigin.desensitization.core.handler.AddressSensitiveFieldHandler;
 
 import java.util.Objects;
 

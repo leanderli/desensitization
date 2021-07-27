@@ -1,8 +1,8 @@
 package net.futureorigin.test.controller;
 
-import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
-import net.futureorigin.datadesensitization.core.handler.CommonNoSensitiveFieldHandler;
-import net.futureorigin.datadesensitization.core.SensitiveObjectHandler;
+import net.futureorigin.desensitization.core.SensitiveFieldHandlerRegistry;
+import net.futureorigin.desensitization.core.handler.CommonNoSensitiveFieldHandler;
+import net.futureorigin.desensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;

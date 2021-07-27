@@ -1,9 +1,8 @@
 package net.futureorigin.test.client.clientobject;
 
 import lombok.Data;
-import net.futureorigin.datadesensitization.core.SensitiveFieldType;
-import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
-import net.futureorigin.test.common.CustomSensitiveFieldType;
+import net.futureorigin.desensitization.core.SensitiveFieldType;
+import net.futureorigin.desensitization.core.annotation.SensitiveField;
 
 import java.util.Date;
 

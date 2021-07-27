@@ -1,6 +1,6 @@
 package net.futureorigin.test.common;
 
-import net.futureorigin.datadesensitization.core.SensitiveFieldType;
+import net.futureorigin.desensitization.core.SensitiveFieldType;
 
 /**
  * data-desensitization

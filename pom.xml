@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.futureorigin</groupId>
-    <artifactId>data-desensitization</artifactId>
+    <artifactId>desensitization</artifactId>
     <packaging>pom</packaging>
     <version>1.1</version>
     <modules>
-        <module>data-desensitization-core</module>
+        <module>desensitization-core</module>
         <module>test</module>
+        <module>desensitization-spring-boot-starter</module>
     </modules>
 
     <properties>

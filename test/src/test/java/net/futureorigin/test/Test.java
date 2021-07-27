@@ -1,9 +1,9 @@
 package net.futureorigin.test;
 
 import com.alibaba.fastjson.JSON;
-import net.futureorigin.datadesensitization.core.bean.BeanField;
-import net.futureorigin.datadesensitization.core.bean.DynamicBean;
-import net.futureorigin.datadesensitization.core.SensitiveObjectHandler;
+import net.futureorigin.desensitization.core.bean.BeanField;
+import net.futureorigin.desensitization.core.bean.DynamicBean;
+import net.futureorigin.desensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 
