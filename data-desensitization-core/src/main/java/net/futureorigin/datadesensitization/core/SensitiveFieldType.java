@@ -1,9 +1,9 @@
 package net.futureorigin.datadesensitization.core;
 
 /**
- * data-desensitization
+ * SensitiveFieldType
  * <p>
- *     敏感字段类型
+ * 敏感字段类型
  * </p>
  *
  * @author Leander Lee create on 2021/7/20.

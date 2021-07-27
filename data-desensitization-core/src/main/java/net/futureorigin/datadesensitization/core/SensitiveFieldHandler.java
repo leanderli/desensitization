@@ -1,7 +1,7 @@
 package net.futureorigin.datadesensitization.core;
 
 /**
- * data-desensitization
+ * SensitiveFieldHandler
  * <p>
  *     敏感数据处理接口
  * </p>

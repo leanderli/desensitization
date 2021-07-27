@@ -7,7 +7,7 @@
     <groupId>net.futureorigin</groupId>
     <artifactId>data-desensitization</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <modules>
         <module>data-desensitization-core</module>
         <module>test</module>

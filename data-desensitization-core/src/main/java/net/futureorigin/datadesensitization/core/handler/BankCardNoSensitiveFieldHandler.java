@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * BankCardNoSensitiveFieldHandler
  * <p>
  * 银行卡号处理
  * 保留前四后四

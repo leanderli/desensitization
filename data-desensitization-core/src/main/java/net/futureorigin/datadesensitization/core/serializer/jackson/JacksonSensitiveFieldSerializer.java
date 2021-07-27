@@ -7,14 +7,13 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
-import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 
 import java.io.IOException;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * JacksonSensitiveFieldSerializer
  * <p>
  * 适配Jackson的敏感数据自定义序列化处理
  * </p>
@@ -23,14 +22,14 @@ import java.util.Objects;
  */
 public class JacksonSensitiveFieldSerializer extends JsonSerializer<Object> implements ContextualSerializer {
 
-    private Class mClass;
+    private boolean mAutoProcessing;
     private String mSensitiveFieldType;
 
     public JacksonSensitiveFieldSerializer() {
     }
 
-    public JacksonSensitiveFieldSerializer(Class clz, String sensitiveFieldType) {
-        this.mClass = clz;
+    public JacksonSensitiveFieldSerializer(boolean autoProcessing, String sensitiveFieldType) {
+        this.mAutoProcessing = autoProcessing;
         this.mSensitiveFieldType = sensitiveFieldType;
     }
 
@@ -39,24 +38,17 @@ public class JacksonSensitiveFieldSerializer extends JsonSerializer<Object> impl
         if (Objects.isNull(object)) {
             return;
         }
+        if (!mAutoProcessing) {
+            return;
+        }
+
         SensitiveFieldHandlerRegistry handlerRegistry = SensitiveFieldHandlerRegistry.getRegistry();
         if (handlerRegistry.alreadyBeSensitived(object)) {
             return;
         }
-        boolean desensitization = true;
-        if (null!= mClass && !mClass.equals(SensitiveField.class)) {
-            Desensitization desensitizationAnno = (Desensitization) mClass.getAnnotation(Desensitization.class);
-            if (null != desensitizationAnno) {
-                desensitization = desensitizationAnno.value();
-            }
-        }
-        if (!desensitization) {
-            jsonGenerator.writeString(String.valueOf(object));
-        } else {
-            jsonGenerator.writeString(handlerRegistry
-                    .getSensitiveFieldHandler(this.mSensitiveFieldType)
-                    .handle(object));
-        }
+        jsonGenerator.writeString(handlerRegistry
+                .getSensitiveFieldHandler(this.mSensitiveFieldType)
+                .handle(object));
     }
 
     @Override
@@ -67,7 +59,7 @@ public class JacksonSensitiveFieldSerializer extends JsonSerializer<Object> impl
                 sensitiveField = beanProperty.getContextAnnotation(SensitiveField.class);
             }
             if (null != sensitiveField) {
-                return new JacksonSensitiveFieldSerializer(sensitiveField.clz(), sensitiveField.value());
+                return new JacksonSensitiveFieldSerializer(sensitiveField.autoProcessing(), sensitiveField.value());
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         } else {

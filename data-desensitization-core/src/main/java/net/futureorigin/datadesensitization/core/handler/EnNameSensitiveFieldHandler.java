@@ -5,7 +5,7 @@ import net.futureorigin.datadesensitization.core.SensitiveFieldType;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * EnNameSensitiveFieldHandler
  * <p>
  * 英文名处理
  * </p>

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * IDCardNoSensitiveFiledHandler
  * <p>
  * 身份证号处理
  * 保留前三位后四位

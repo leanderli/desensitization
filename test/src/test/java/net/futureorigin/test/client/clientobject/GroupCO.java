@@ -2,7 +2,6 @@ package net.futureorigin.test.client.clientobject;
 
 import lombok.Data;
 import net.futureorigin.datadesensitization.core.SensitiveFieldType;
-import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 
 /**
@@ -12,7 +11,6 @@ import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
  * @author Leander Lee create on 2021/7/26.
  */
 @Data
-@Desensitization
 public class GroupCO extends AbstractCO {
 
     @SensitiveField(value = SensitiveFieldType.CN_NAME, clz = GroupCO.class)
@@ -20,5 +18,11 @@ public class GroupCO extends AbstractCO {
 
     @SensitiveField(value = SensitiveFieldType.CN_NAME, clz = GroupCO.class)
     private String groupClass;
+
+    @SensitiveField(value = SensitiveFieldType.CN_NAME, clz = GroupCO.class)
+    private String telephone;
+
+//    @SensitiveField(value = SensitiveFieldType.COMMON_NO, clz = GroupCO.class)
+    private Long index;
 
 }

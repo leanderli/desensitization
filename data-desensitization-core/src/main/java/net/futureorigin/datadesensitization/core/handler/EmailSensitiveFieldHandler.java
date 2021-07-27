@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * EmailSensitiveFieldHandler
  * <p>
  * 电子邮件处理
  * 保留前缀第一个字母和后缀

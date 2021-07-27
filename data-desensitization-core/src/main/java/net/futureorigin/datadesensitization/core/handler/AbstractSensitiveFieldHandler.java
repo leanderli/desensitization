@@ -3,7 +3,7 @@ package net.futureorigin.datadesensitization.core.handler;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandler;
 
 /**
- * data-desensitization
+ * AbstractSensitiveFieldHandler
  * <p></p>
  *
  * @author Leander Lee create on 2021/7/21.

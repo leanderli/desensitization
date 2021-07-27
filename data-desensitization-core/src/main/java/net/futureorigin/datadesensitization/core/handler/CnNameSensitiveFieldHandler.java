@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * CnNameSensitiveFieldHandler
  * <p>
  * 中文姓名处理
  * 保留第一个汉字

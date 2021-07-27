@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.HashMap;
 
 /**
- * data-desensitization
+ * SensitiveFieldHandlerRegistry
  * <p>
  * 敏感数据处理器注册器
  * </p>

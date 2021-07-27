@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * BankCoopNoSensitiveFieldHandler
  * <p>
  * 开户行航联号处理
  * 前四位明文，后面脱敏

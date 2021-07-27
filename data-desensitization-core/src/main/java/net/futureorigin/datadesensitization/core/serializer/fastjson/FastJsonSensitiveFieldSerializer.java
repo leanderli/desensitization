@@ -3,14 +3,13 @@ package net.futureorigin.datadesensitization.core.serializer.fastjson;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
-import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.annotation.SensitiveField;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * FastJsonSensitiveFieldSerializer
  * <p>
  * 适配FastJson的敏感数据序列化
  * </p>
@@ -26,14 +25,16 @@ public class FastJsonSensitiveFieldSerializer implements ValueFilter {
         }
         Class<? extends Object> clz = object.getClass();
         try {
-            Desensitization desensitization = clz.getAnnotation(Desensitization.class);
-            if (null != desensitization && !desensitization.value()) {
+            Field field = ReflectUtil.getField(clz, name);
+            if (null == field) {
                 return value;
             }
-
-            Field field = ReflectUtil.getField(clz, name);
             SensitiveField sensitiveField = field.getAnnotation(SensitiveField.class);
             if (null == sensitiveField) {
+                return value;
+            }
+            boolean autoProcessing = sensitiveField.autoProcessing();
+            if (!autoProcessing) {
                 return value;
             }
 

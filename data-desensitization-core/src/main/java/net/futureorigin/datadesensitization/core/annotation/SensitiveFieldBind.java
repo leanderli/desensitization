@@ -1,7 +1,7 @@
 package net.futureorigin.datadesensitization.core.annotation;
 
 /**
- * data-desensitization
+ * SensitiveFieldBind
  * <p>
  * 敏感字段自定义数据绑定
  * </p>

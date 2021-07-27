@@ -3,7 +3,7 @@ package net.futureorigin.datadesensitization.core.handler;
 import net.futureorigin.datadesensitization.core.SensitiveFieldType;
 
 /**
- * data-desensitization
+ * NoneSensitiveFieldHandler
  * <p>
  * 不处理敏感数据
  * </p>

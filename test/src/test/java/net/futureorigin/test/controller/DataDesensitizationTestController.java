@@ -1,20 +1,19 @@
 package net.futureorigin.test.controller;
 
-import cn.hutool.core.annotation.AnnotationUtil;
 import net.futureorigin.datadesensitization.core.SensitiveFieldHandlerRegistry;
-import net.futureorigin.datadesensitization.core.annotation.Desensitization;
 import net.futureorigin.datadesensitization.core.handler.CommonNoSensitiveFieldHandler;
 import net.futureorigin.datadesensitization.core.util.DesensitizationUtils;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
 import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(path = "test")
-public class DataDesensitizationTestController {
+public class DataDesensitizationTestController extends SensitiveHandleController {
 
     static {
         SensitiveFieldHandlerRegistry.getRegistry().registerSensitiveFieldHandler(
@@ -34,35 +33,23 @@ public class DataDesensitizationTestController {
         );
     }
 
-    @Autowired
-    private HttpServletRequest request;
-
     @GetMapping(path = "getUser")
-    public UserCO getUser() {
-        UserCO userCO = new UserCO();
-        userCO.setId(UUID.randomUUID().toString());
-        userCO.setUserName("User-" + UUID.randomUUID());
-        userCO.setUserCnName("李华");
-        userCO.setUserEnName("Washing·Lee");
-        userCO.setIdCardNo(110101199003073271L);
-        userCO.setTelephone("0108899988");
-        userCO.setMobile(19088999988L);
-        userCO.setEmail("lihua@hotmail.com");
-        userCO.setAddress("上海市浦东新区迎宾大道6000号");
-        userCO.setBankCardNo(62234027863018843L);
-        userCO.setBankCoopNo(105873100086L);
+    public ResponseEntity<Object> getUser() {
+        UserCO userCO = generateUser(0);
 
-        userCO.setStudentNo(202100011021L);
+        return ResponseEntity.ok(nonDesensitization()
+                ? userCO : DesensitizationUtils.desensitization(userCO));
+    }
 
-        userCO.setBirthday(new Date());
-
-        boolean desensitization = Boolean.parseBoolean(request.getHeader("Data-Desensitization"));
-        if (desensitization) {
-            DesensitizationUtils.desensitization(userCO.getClass());
-        } else {
-            DesensitizationUtils.nonDesensization(userCO.getClass());
+    @GetMapping(path = "getUserList")
+    public ResponseEntity<Object> getUserList() {
+        List<UserCO> userCOS = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            userCOS.add(generateUser(i));
         }
-        return userCO;
+
+        return ResponseEntity.ok(nonDesensitization()
+                ? userCOS : DesensitizationUtils.desensitization(userCOS));
     }
 
     @GetMapping(path = "getGroup")
@@ -70,14 +57,28 @@ public class DataDesensitizationTestController {
         GroupCO groupCO = new GroupCO();
         groupCO.setGroupName("TestGroup");
         groupCO.setGroupClass("ROLE");
+        groupCO.setTelephone("0108899988");
 
-        boolean desensitization = Boolean.parseBoolean(request.getHeader("Data-Desensitization"));
-        if (desensitization) {
-            DesensitizationUtils.desensitization(groupCO.getClass());
-        } else {
-            DesensitizationUtils.nonDesensization(groupCO.getClass());
-        }
         return groupCO;
     }
 
+    private UserCO generateUser(int index) {
+        UserCO userCO = new UserCO();
+        userCO.setId(UUID.randomUUID().toString());
+        userCO.setUserName("User-" + UUID.randomUUID());
+        userCO.setUserCnName("李华-" + index);
+        userCO.setUserEnName("Washing·Lee-" + index);
+        userCO.setIdCardNo(110101199003073271L + index);
+        userCO.setTelephone("0108899988-" + index);
+        userCO.setMobile(19088999988L + index);
+        userCO.setEmail("lihua-" + index + "@hotmail.com");
+        userCO.setAddress("上海市浦东新区迎宾大道6000号-" + index);
+        userCO.setBankCardNo(62234027863018843L + index);
+        userCO.setBankCoopNo(105873100086L + index);
+
+        userCO.setStudentNo(202100011021L + index);
+
+        userCO.setBirthday(new Date());
+        return userCO;
+    }
 }

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * MobileSensitiveFieldHandler
  * <p>
  * 移动号码处理
  * 保留前三位后四位

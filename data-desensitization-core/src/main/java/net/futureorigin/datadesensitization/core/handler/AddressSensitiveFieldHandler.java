@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 /**
- * data-desensitization
+ * AddressSensitiveFieldHandler
  * <p>
  * 地址处理
  * 地址只显示到地区，不显示详细地址
