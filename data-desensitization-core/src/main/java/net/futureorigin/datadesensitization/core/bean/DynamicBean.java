@@ -1,8 +1,8 @@
 package net.futureorigin.datadesensitization.core.bean;
 
 import cn.hutool.core.util.ArrayUtil;
-import org.springframework.cglib.beans.BeanGenerator;
-import org.springframework.cglib.beans.BeanMap;
+import net.sf.cglib.beans.BeanGenerator;
+import net.sf.cglib.beans.BeanMap;
 
 /**
  * DynamicBean
