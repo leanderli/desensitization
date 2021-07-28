@@ -1,4 +1,4 @@
-# data-desensitization（数据脱敏）
+# desensitization（数据脱敏）
 
 ### 一、简介
 
