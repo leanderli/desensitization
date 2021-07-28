@@ -3,6 +3,7 @@ package net.futureorigin.test.client.clientobject;
 import lombok.Data;
 import net.futureorigin.desensitization.core.SensitiveFieldType;
 import net.futureorigin.desensitization.core.annotation.SensitiveField;
+import net.futureorigin.test.common.CustomSensitiveFieldType;
 
 import java.util.Date;
 
@@ -45,7 +46,7 @@ public class UserCO extends BaseCO {
     @SensitiveField(value = SensitiveFieldType.COMMON_NO)
     private Long studentNo;
 
-//    @SensitiveField(value = CustomSensitiveFieldType.BIRTHDAY)
+    @SensitiveField(value = CustomSensitiveFieldType.BIRTHDAY)
     private Date birthday;
 
 

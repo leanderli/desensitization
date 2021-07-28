@@ -1,5 +1,6 @@
 package net.futureorigin.test;
 
+import net.futureorigin.desensitization.spring.boot.EnableSensitiveHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,10 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Leander Lee create on 2021/7/21.
  */
 @SpringBootApplication(
-        scanBasePackages = {
-                "net.futureorigin.desensitization", "net.futureorigin.test"
-        }
+//        scanBasePackages = {
+//                "net.futureorigin.desensitization", "net.futureorigin.test"
+//        }
 )
+@EnableSensitiveHandler
 public class TestAppliation {
 
     public static void main(String[] args) {

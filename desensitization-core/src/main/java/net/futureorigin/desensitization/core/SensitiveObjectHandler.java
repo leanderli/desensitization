@@ -23,10 +23,36 @@ import java.util.Objects;
  */
 public class SensitiveObjectHandler {
 
-    public SensitiveObjectHandler() {
+    private SensitiveObjectHandler() {
     }
 
-    private static Object handleObject(Object object) {
+    public static SensitiveObjectHandler getObjectHandler() {
+        return SensitiveObjectHandlerHolder.INNER;
+    }
+
+    public Object desensitization(Object object) {
+        if (Objects.isNull(object)) {
+            throw new IllegalArgumentException("'object' must be not null");
+        }
+        if (object instanceof Map) {
+            return object;
+        } else if (object instanceof List) {
+            List<Object> objectList = (List<Object>) object;
+            if (CollectionUtil.isEmpty(objectList)) {
+                return object;
+            }
+
+            List<Object> newObjectList = new ArrayList<>();
+            for (Object o : objectList) {
+                newObjectList.add(handleObject(o));
+            }
+            return newObjectList;
+        } else {
+            return handleObject(object);
+        }
+    }
+
+    private Object handleObject(Object object) {
         Class<?> clz = object.getClass();
         Field[] fields = ReflectUtil.getFields(clz);
         if (ArrayUtil.isEmpty(fields)) {
@@ -73,7 +99,7 @@ public class SensitiveObjectHandler {
         return object;
     }
 
-    private static boolean validateFieldType(Field[] fields) {
+    private boolean validateFieldType(Field[] fields) {
         for (Field field : fields) {
             if (null == field.getAnnotation(SensitiveField.class)) {
                 continue;
@@ -85,25 +111,7 @@ public class SensitiveObjectHandler {
         return true;
     }
 
-    public Object desensitization(Object object) {
-        if (Objects.isNull(object)) {
-            throw new IllegalArgumentException("'object' must be not null");
-        }
-        if (object instanceof Map) {
-            return object;
-        } else if (object instanceof List) {
-            List<Object> objectList = (List<Object>) object;
-            if (CollectionUtil.isEmpty(objectList)) {
-                return object;
-            }
-
-            List<Object> newObjectList = new ArrayList<>();
-            for (Object o : objectList) {
-                newObjectList.add(handleObject(o));
-            }
-            return newObjectList;
-        } else {
-            return handleObject(object);
-        }
+    private static class SensitiveObjectHandlerHolder {
+        private static final SensitiveObjectHandler INNER = new SensitiveObjectHandler();
     }
 }

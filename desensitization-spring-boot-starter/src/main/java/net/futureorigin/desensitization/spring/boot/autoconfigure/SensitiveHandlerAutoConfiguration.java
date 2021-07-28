@@ -22,7 +22,7 @@ public class SensitiveHandlerAutoConfiguration {
     @Bean
     public SensitiveObjectHandler sensitiveObjectHandler(SensitiveHandlerProperties properties) {
         registerAdditionalHandler(properties);
-        return new SensitiveObjectHandler();
+        return SensitiveObjectHandler.getObjectHandler();
     }
 
     private void registerAdditionalHandler(SensitiveHandlerProperties properties) {
