@@ -23,6 +23,4 @@ public class SensitiveHandleController {
         }
         return Boolean.parseBoolean(request.getHeader("Non-Desensitization"));
     }
-
-
 }
