@@ -15,7 +15,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SensitiveHandlerProperties {
     static final String PROP_PREFIX = "net.futureorigin.desensitization";
 
-    @Value("${net.futureorigin.desensitization.additional-handlers}")
     private String[] additionalHandlers;
 
     public String[] getAdditionalHandlers() {

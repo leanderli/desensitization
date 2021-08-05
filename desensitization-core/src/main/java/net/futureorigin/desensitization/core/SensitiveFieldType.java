@@ -8,15 +8,7 @@ package net.futureorigin.desensitization.core;
  *
  * @author Leander Lee create on 2021/7/20.
  */
-public class SensitiveFieldType {
-    /**
-     * 不处理
-     */
-    public static final String NONE = "none";
-    /**
-     * 通用号码处理（保留前三位后四位）
-     */
-    public static final String COMMON_NO = "commonNo";
+public class SensitiveFieldType extends AbstractSensitiveFieldType {
     /**
      * 中文姓名
      */
@@ -28,7 +20,7 @@ public class SensitiveFieldType {
     /**
      * 身份证号码
      */
-    public static final String ID_CARD_NO = "idCardNo";
+    public static final String ID_CARD_NUM = "idCardNum";
     /**
      * 电话号码
      */

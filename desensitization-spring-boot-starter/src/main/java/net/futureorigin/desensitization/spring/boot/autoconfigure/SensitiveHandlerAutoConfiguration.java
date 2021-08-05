@@ -1,5 +1,6 @@
 package net.futureorigin.desensitization.spring.boot.autoconfigure;
 
+import cn.hutool.core.util.ArrayUtil;
 import net.futureorigin.desensitization.core.SensitiveFieldHandler;
 import net.futureorigin.desensitization.core.SensitiveFieldHandlerRegistry;
 import net.futureorigin.desensitization.core.SensitiveObjectHandler;
@@ -28,10 +29,12 @@ public class SensitiveHandlerAutoConfiguration {
     private void registerAdditionalHandler(SensitiveHandlerProperties properties) {
         SensitiveFieldHandlerRegistry handlerRegistry = SensitiveFieldHandlerRegistry.getRegistry();
         try {
-            for (String additionalHandler : properties.getAdditionalHandlers()) {
-                Class<?> clz = Class.forName(additionalHandler);
-                handlerRegistry.registerSensitiveFieldHandler(
-                        (SensitiveFieldHandler) clz.getDeclaredConstructor().newInstance());
+            if (null != properties && ArrayUtil.isNotEmpty(properties.getAdditionalHandlers())) {
+                for (String additionalHandler : properties.getAdditionalHandlers()) {
+                    Class<?> clz = Class.forName(additionalHandler);
+                    handlerRegistry.registerSensitiveFieldHandler(
+                            (SensitiveFieldHandler) clz.getDeclaredConstructor().newInstance());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

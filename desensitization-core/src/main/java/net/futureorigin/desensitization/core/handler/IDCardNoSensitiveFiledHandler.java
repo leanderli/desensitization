@@ -17,7 +17,7 @@ import java.util.Objects;
 public class IDCardNoSensitiveFiledHandler extends AbstractSensitiveFieldHandler {
     @Override
     public String getSensitiveType() {
-        return SensitiveFieldType.ID_CARD_NO;
+        return SensitiveFieldType.ID_CARD_NUM;
     }
 
     @Override

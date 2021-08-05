@@ -30,6 +30,7 @@ public class SensitiveObjectHandler {
         return SensitiveObjectHandlerHolder.INNER;
     }
 
+    @SuppressWarnings("unchecked")
     public Object desensitization(Object object) {
         if (Objects.isNull(object)) {
             throw new IllegalArgumentException("'object' must be not null");

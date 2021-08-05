@@ -22,7 +22,7 @@ public class UserCO extends BaseCO {
     private String userCnName;
     private String userEnName;
 
-    @SensitiveField(value = SensitiveFieldType.ID_CARD_NO)
+    @SensitiveField(value = SensitiveFieldType.ID_CARD_NUM)
     private Long idCardNo;
 
     @SensitiveField(value = SensitiveFieldType.TELEPHONE)
