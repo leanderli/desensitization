@@ -1,11 +1,8 @@
 package net.futureorigin.test.controller;
 
-import net.futureorigin.desensitization.core.SensitiveFieldHandlerRegistry;
-import net.futureorigin.desensitization.core.handler.CommonNoSensitiveFieldHandler;
 import net.futureorigin.desensitization.core.SensitiveObjectHandler;
 import net.futureorigin.test.client.clientobject.GroupCO;
 import net.futureorigin.test.client.clientobject.UserCO;
-import net.futureorigin.test.common.BirthdaySensitiveFieldHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
