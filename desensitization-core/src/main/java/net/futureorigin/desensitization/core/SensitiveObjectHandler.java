@@ -31,7 +31,7 @@ public class SensitiveObjectHandler {
     }
 
     @SuppressWarnings("unchecked")
-    public Object desensitization(Object object) {
+    public Object desensitization(Object object, String... excludeProperties) {
         if (Objects.isNull(object)) {
             throw new IllegalArgumentException("'object' must be not null");
         }
@@ -45,15 +45,15 @@ public class SensitiveObjectHandler {
 
             List<Object> newObjectList = new ArrayList<>();
             for (Object o : objectList) {
-                newObjectList.add(handleObject(o));
+                newObjectList.add(handleObject(o, excludeProperties));
             }
             return newObjectList;
         } else {
-            return handleObject(object);
+            return handleObject(object, excludeProperties);
         }
     }
 
-    private Object handleObject(Object object) {
+    private Object handleObject(Object object, String... excludeProperties) {
         Class<?> clz = object.getClass();
         Field[] fields = ReflectUtil.getFields(clz);
         if (ArrayUtil.isEmpty(fields)) {
@@ -70,6 +70,9 @@ public class SensitiveObjectHandler {
                     if (!isValidType) {
                         beanFields.add(new BeanField(field.getName(), field.getType(), field.get(object)));
                     }
+                    continue;
+                }
+                if (ArrayUtil.contains(excludeProperties, field.getName())) {
                     continue;
                 }
                 try {
