@@ -17,8 +17,11 @@ import java.util.Objects;
  */
 public class AddressSensitiveFieldHandler extends AbstractSensitiveFieldHandler {
 
-    private static final int RIGHT = 10;
-    private static final int LEFT = 6;
+    private static final String PROVINCE = "省";
+    private static final String CITY = "市";
+    private static final String COUNTRY = "县";
+    private static final String REGION = "区";
+    private static final String SIGN = "*****";
 
     @Override
     public String getSensitiveType() {
@@ -31,14 +34,19 @@ public class AddressSensitiveFieldHandler extends AbstractSensitiveFieldHandler 
             return null;
         }
         String address = src.toString();
-        int length = StringUtils.length(address);
-        if (length > RIGHT + LEFT) {
-            return StringUtils.rightPad(StringUtils.left(address, length - RIGHT), length, "*");
+        // 按省市县来处理
+        if (address.contains(REGION) || address.contains(COUNTRY)) {
+            if (address.contains(REGION)) {
+                return address.substring(0, address.indexOf(REGION) + 1).concat(SIGN);
+            }
+            if (address.contains(COUNTRY)) {
+                return address.substring(0, address.indexOf(COUNTRY) + 1).concat(SIGN);
+            }
+        } else if (address.contains(CITY)) {
+            return address.substring(0, address.indexOf(CITY) + 1).concat(SIGN);
+        } else if (address.contains(PROVINCE)) {
+            return address.substring(0, address.indexOf(PROVINCE) + 1).concat(SIGN);
         }
-        if (length <= LEFT) {
-            return address;
-        } else {
-            return address.substring(0, LEFT + 1).concat("*****");
-        }
+        return address;
     }
 }

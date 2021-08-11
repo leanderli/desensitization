@@ -35,7 +35,7 @@ public class SensitiveFieldHandlerRegistry {
                 new CnNameSensitiveFieldHandler(),
                 new EnNameSensitiveFieldHandler(),
                 new EmailSensitiveFieldHandler(),
-                new IDCardNoSensitiveFiledHandler(),
+                new IDCardNumSensitiveFieldHandler(),
                 new TelephoneSensitiveFieldHandler(),
                 new MobileSensitiveFieldHandler()
         );
