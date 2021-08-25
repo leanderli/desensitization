@@ -190,7 +190,18 @@ public class GroupCO extends AbstractCO {
 3、Controller 中手动处理：
 
 ```java
-@RestController@RequestMapping(path = "test")public class DataDesensitizationTestController extends SensitiveHandleController {    @Autowired    private SensitiveObjectHandler sensitiveObjectHandler;    @GetMapping(path = "getUser")    public ResponseEntity<Object> getUser() {        UserCO userCO = generateUser(0);        return ResponseEntity.ok(nonDesensitization()                ? userCO : sensitiveObjectHandler.desensitization(userCO));    }}
+@RestController
+@RequestMapping(path = "test")
+public class DataDesensitizationTestController extends SensitiveHandleController {    
+	@Autowired    
+	private SensitiveObjectHandler sensitiveObjectHandler;    
+	
+	@GetMapping(path = "getUser")    
+	public ResponseEntity<Object> getUser() {        
+		UserCO userCO = generateUser(0);        
+		return ResponseEntity.ok(nonDesensitization() ? userCO : sensitiveObjectHandler.desensitization(userCO));    
+	}
+}
 ```
 
 > 1、自动注入 SensitiveObjectHandler；
@@ -198,7 +209,19 @@ public class GroupCO extends AbstractCO {
 > 2、在返回数据时手动调用方法处理：sensitiveObjectHandler.desensitization(...)
 
 ```java
-@RestControllerpublic class SensitiveHandleController {    @Autowired    private HttpServletRequest request;    protected boolean nonDesensitization() {        if (null == request.getHeader("Non-Desensitization")) {            return false;        }        return Boolean.parseBoolean(request.getHeader("Non-Desensitization"));    }}
+@RestController
+public class SensitiveHandleController {    
+
+	@Autowired   
+	private HttpServletRequest request;    
+	
+	protected boolean nonDesensitization() {        
+		if (null == request.getHeader("Non-Desensitization")) {            
+			return false;        
+		}        
+		return Boolean.parseBoolean(request.getHeader("Non-Desensitization"));    
+	}
+}
 ```
 
 > 此公共 Controller 是为了模拟部分场景脱敏和不脱敏，具体可以查看源码 test 模块的 test 包的测试代码。
